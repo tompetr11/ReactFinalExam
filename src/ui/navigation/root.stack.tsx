@@ -2,6 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './tab/tab.navigator';
 import { MainParamList } from './types';
+import DetailScreen from '../screens/detail/detail.screen';
 
 const Stack = createNativeStackNavigator<MainParamList>();
 const RootStack = () => {

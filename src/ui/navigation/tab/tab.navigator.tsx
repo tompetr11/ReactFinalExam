@@ -1,7 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { TabParams } from '../types';
+import { TabParams, Screen } from '../types';
+
+
 const Tab = createBottomTabNavigator<TabParams>();
 
 export default function TabNavigator() {
