@@ -36,4 +36,11 @@ export const styles = StyleSheet.create({
     height: 150,
     width: 150,
   },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+    marginBottom: 8,
+  },
 });

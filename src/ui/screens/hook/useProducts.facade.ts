@@ -1,4 +1,6 @@
 import { useCallback, useState } from "react";
+import { storage } from "../../../core/storage/storage";
+import { PREFERRED_PRODUCTS } from "../../../core/storage/types";
 
 interface Product{
     id:number;
@@ -25,7 +27,7 @@ export interface GenericProduct{
 export const useProducts = () => {
 const [products, setProducts] = useState<Product[]>([]);
 const [initialProducts, setInitialProducts] = useState<Product[]>([]);
-//const[favorites, setFavorites] = useState<number[]>([]);
+const[favorites, setFavorites] = useState<number[]>([]);
 
 
 const refreshProducts = useCallback(async() => {
@@ -39,12 +41,36 @@ const refreshProducts = useCallback(async() => {
 }
 },[]);
 
+const loadFavorites = useCallback(async () => {
+    try {
+      const storedFavorites = await storage.getItem(PREFERRED_PRODUCTS);
+      const parsedFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+      setFavorites(parsedFavorites);
+    } catch (error) {
+      console.error('Error loading favorites:', error);
+    }
+  }, []);
+  const addFavorite = useCallback(
+    async (item: Product) => {
+      const updatedFavorites = favorites.includes(item.id)
+        ? favorites.filter((id) => id !== item.id)
+        : [...favorites, item.id];
+
+      setFavorites(updatedFavorites);
+      await storage.setItem(PREFERRED_PRODUCTS, JSON.stringify(updatedFavorites));
+    },
+    [favorites]
+  );
 return{
     products,
     setProducts,
     initialProducts,
     setInitialProducts,
     refreshProducts,
+    favorites,
+    setFavorites,
+    loadFavorites,
+    addFavorite,
 }
 
 };

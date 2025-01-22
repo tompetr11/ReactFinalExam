@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons'; // Assicurati di avere @expo/vector-icons installato
 import { styles } from './genericProduct';
 
 interface GenericProduct {
@@ -13,10 +14,12 @@ interface GenericProduct {
 
 interface ProductProps {
   genericProduct: GenericProduct;
+  selected?: boolean;
   onPress: () => void;
+  onAddFavorite?: () => void;
 }
 
-export const GenericProduct = ({ genericProduct, onPress }: ProductProps) => {
+export const GenericProduct = ({ genericProduct, onPress, onAddFavorite, selected }: ProductProps) => {
   const [loading, setLoading] = useState(false);
 
   const { title, price, image } = genericProduct;
@@ -38,10 +41,19 @@ export const GenericProduct = ({ genericProduct, onPress }: ProductProps) => {
             source={{ uri: image }}
             style={styles.image}
           />
-          <Text style={styles.title}>{title}</Text>
+          <View style={styles.header}>
+            <Text style={styles.title}>{title}</Text>
+            <Ionicons
+              onPress={onAddFavorite}
+              name={selected ? 'star' : 'star-outline'}
+              size={28}
+              color={'#ffd700'}
+            />
+          </View>
           <Text style={styles.price}>${price.toFixed(2)}</Text>
         </>
       )}
     </TouchableOpacity>
   );
 };
+
