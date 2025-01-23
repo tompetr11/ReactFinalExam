@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons'; // Assicurati di avere @expo/vector-icons installato
 import { styles } from './genericProduct';
+
 
 interface GenericProduct {
   id: number;
@@ -9,7 +10,7 @@ interface GenericProduct {
   price: number;
   description: string;
   category: string;
-  image: string;
+  image: any;
 }
 
 interface ProductProps {
@@ -38,7 +39,7 @@ export const GenericProduct = ({ genericProduct, onPress, onAddFavorite, selecte
           <Image
             onLoadStart={() => setLoading(true)}
             onLoadEnd={() => setLoading(false)}
-            source={{ uri: image }}
+            source={ image }
             style={styles.image}
           />
           <View style={styles.header}>
@@ -56,4 +57,3 @@ export const GenericProduct = ({ genericProduct, onPress, onAddFavorite, selecte
     </TouchableOpacity>
   );
 };
-
