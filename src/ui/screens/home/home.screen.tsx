@@ -50,7 +50,7 @@ const HomeScreen = ({ navigation }: Props) => {
   const renderItem = useCallback<ListRenderItem<Product>>(
     ({ item }) => {
         return (
-            <View style ={styles.card}>
+            <View style={styles.card}>
                 <GenericProduct
                     title={item.title}
                     price={item.price}
@@ -62,7 +62,7 @@ const HomeScreen = ({ navigation }: Props) => {
                         });
                     } }
                     onAddFavorite={() => addFavorite(item)} id={0}                />
-            </View>
+           </View>
         );
 },[]);
 
@@ -95,6 +95,7 @@ const HomeScreen = ({ navigation }: Props) => {
           keyExtractor={(item) => item.id.toString()}
           ItemSeparatorComponent={ItemSeparatorComponent}
           contentContainerStyle={styles.flatList}
+          numColumns={undefined}
         />
       ) : (
         <Text style={styles.emptyMessage}>No products available</Text>

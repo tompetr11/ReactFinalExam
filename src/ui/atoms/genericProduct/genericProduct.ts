@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   card: {
@@ -10,12 +10,13 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
     margin: 10,
-    width: 150,
+    width: 160, // Larghezza fissa
+    height: 220, // Altezza fissa per uniformità
     overflow: 'hidden',
   },
   imageContainer: {
     width: '100%',
-    height: 150,
+    height: 140, // Dimensione fissa per l'immagine
     backgroundColor: '#f0f0f0',
     justifyContent: 'center',
     alignItems: 'center',
@@ -30,12 +31,15 @@ export const styles = StyleSheet.create({
   },
   infoContainer: {
     padding: 10,
+    flex: 1, // Per assicurarsi che lo spazio rimanente venga usato dal testo
   },
   title: {
     fontSize: 14,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 5,
+    numberOfLines: 1, // Mostra una sola riga
+    ellipsizeMode: 'tail', // Aggiungi "..." per il testo lungo
   },
   price: {
     fontSize: 14,

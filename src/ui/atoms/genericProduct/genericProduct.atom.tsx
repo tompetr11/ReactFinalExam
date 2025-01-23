@@ -39,7 +39,10 @@ export const GenericProduct = ({ title, price, image, onAddFavorite, onPress }: 
       )}
     </View>
     <View style={styles.infoContainer}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}
+      numberOfLines={2} // Mostra una sola riga del titolo
+      ellipsizeMode="tail" // Aggiungi "..." per i titoli lunghi
+      >{title}</Text>
       <Text style={styles.price}>${price.toFixed(2)}</Text>
     </View>
   </TouchableOpacity>

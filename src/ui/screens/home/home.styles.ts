@@ -6,7 +6,11 @@ export const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   flatList: {
-    padding: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap', // Permette agli elementi di andare a capo
+    justifyContent: 'space-between', // Distribuisce gli elementi
+    paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   productSeparator: {
     height: 10,
@@ -17,16 +21,13 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     color: '#888',
   },
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-    margin: 10,
-    overflow: 'hidden',
-    width: 150,
+  columnWrapper: {
+    justifyContent: 'space-between',
   },
+  card: {
+    flex: 1, // Adatta gli elementi al contenitore
+    margin: 5,
+    maxWidth: '48%', // Occupa circa metà dello schermo con un margine
+  },
+  
 });
