@@ -27,12 +27,12 @@ export default function TabNavigator() {
           alignItems: 'center',
         },
         tabBarIcon: ({ focused }) => {
-            let iconName: 'home' | 'heart' = 'home'; 
+            let iconName: 'home' | 'star' = 'home'; 
           
             if (route.name === Screen.Home) {
               iconName = 'home';
             } else if (route.name === Screen.Favorites) {
-              iconName = 'heart';
+              iconName = 'star';
             }
           
             return <Ionicons name={iconName} size={24} color={focused ? '#FFFFFF' : '#D3D3D3'} />;

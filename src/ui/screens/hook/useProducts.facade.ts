@@ -34,8 +34,15 @@ const refreshProducts = useCallback(async() => {
     try{
     const responde =await fetch('https://fakestoreapi.com/products');
     const data = await responde.json();
-    setInitialProducts([...data.products]);
-    setProducts([...data.products]);
+
+    // Filtra prodotti senza URL immagine valido
+    const validProducts = data.filter(
+      (product: Product) =>
+        product.image && typeof product.image === 'string' && product.image.startsWith('http')
+    );
+    
+    setInitialProducts([...data]);
+    setProducts([...data]);
 }catch(error){
     console.error('Error fetching products:', error);
 }

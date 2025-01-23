@@ -3,9 +3,9 @@ import { View, Text, Image, StyleSheet, ScrollView, ActivityIndicator, Button } 
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Ionicons from "@expo/vector-icons/Ionicons"; // Assicurati di avere @expo/vector-icons installato
 import { MainParamList, Screen } from "../../navigation/types";
 import { styles } from "./detail.styles";
+import { Ionicons } from '@expo/vector-icons';
 
 interface DetailProduct {
   id: number;

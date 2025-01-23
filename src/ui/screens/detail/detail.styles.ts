@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   imageHeader: {
     width: "100%",
     height: 300,
-    resizeMode: "cover",
+    resizeMode: "contain",
   },
   navigatorContainer: {
     flexDirection: "row",
