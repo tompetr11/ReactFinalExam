@@ -28,6 +28,8 @@ export const useProducts = () => {
 const [products, setProducts] = useState<Product[]>([]);
 const [initialProducts, setInitialProducts] = useState<Product[]>([]);
 const[favorites, setFavorites] = useState<number[]>([]);
+const [initialFilter, setInitialFilter] = useState<string[]>([]);
+const [filter, setFilter] = useState<string[]>([]);
 
 
 const refreshProducts = useCallback(async() => {
@@ -46,6 +48,17 @@ const refreshProducts = useCallback(async() => {
 }catch(error){
     console.error('Error fetching products:', error);
 }
+},[]);
+
+const refreshFilter = useCallback(async()=>{
+  try{
+    const responde =await fetch('https://fakestoreapi.com/products/categories');
+    const data = await responde.json();
+    setInitialFilter([...data]);
+    setFilter(['All',...data]);
+  }catch(error){
+    console.error('Error fetching filter:', error);
+  }
 },[]);
 
 const loadFavorites = useCallback(async () => {
@@ -78,6 +91,11 @@ return{
     setFavorites,
     loadFavorites,
     addFavorite,
+    initialFilter,
+    setInitialFilter,
+    filter,
+    setFilter,
+    refreshFilter
 }
 
 };

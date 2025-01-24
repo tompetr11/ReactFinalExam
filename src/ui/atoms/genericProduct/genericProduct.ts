@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
   },
   image: {
     width: '100%',
@@ -38,11 +39,18 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 5,
-    numberOfLines: 1, // Mostra una sola riga
-    ellipsizeMode: 'tail', // Aggiungi "..." per il testo lungo
+    //numberOfLines: 1, // Mostra una sola riga
+    //ellipsizeMode: 'tail', // Aggiungi "..." per il testo lungo
   },
   price: {
     fontSize: 14,
     color: '#888',
   },
+  favoriteIcon: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    zIndex: 1, // Porta l'icona sopra l'immagine
+  },
+  
 });

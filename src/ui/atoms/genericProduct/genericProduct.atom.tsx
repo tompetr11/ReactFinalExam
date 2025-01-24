@@ -13,40 +13,55 @@ interface ProductProps {
   onAddFavorite?: () => void;
 }
 
-export const GenericProduct = ({ title, price, image, onAddFavorite, onPress }: ProductProps) => {
+export const GenericProduct = ({ title, price, image,selected, onAddFavorite, onPress }: ProductProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-    <View style={styles.imageContainer}>
-      {loading && !error && (
-        <ActivityIndicator size="large" color="#000" style={styles.loader} />
-      )}
-      {!error ? (
-        <Image
-          onLoadStart={() => setLoading(true)}
-          onLoadEnd={() => setLoading(false)}
-          onError={() => {
-            setLoading(false);
-            setError(true); // Segnala l'errore
-          }}
-          source={{ uri: image }}
-          style={styles.image}
+      {/* Contenitore immagine con icona */}
+      <View style={styles.imageContainer}>
+        {/* Stella in alto a destra */}
+        <Ionicons
+          onPress={onAddFavorite}
+          name={selected ? 'star' : 'star-outline'}
+          size={28}
+          color={'#ffd700'}
+          style={styles.favoriteIcon}
         />
-      ) : (
-        <Ionicons name="image-outline" size={50} color="#ccc" /> // Icona di fallback
-      )}
-    </View>
-    <View style={styles.infoContainer}>
-      <Text style={styles.title}
-      numberOfLines={2} // Mostra una sola riga del titolo
-      ellipsizeMode="tail" // Aggiungi "..." per i titoli lunghi
-      >{title}</Text>
-      <Text style={styles.price}>${price.toFixed(2)}</Text>
-    </View>
-  </TouchableOpacity>
-);
+        
+        {loading && !error && (
+          <ActivityIndicator size="large" color="#000" style={styles.loader} />
+        )}
+        {!error ? (
+          <Image
+            onLoadStart={() => setLoading(true)}
+            onLoadEnd={() => setLoading(false)}
+            onError={() => {
+              setLoading(false);
+              setError(true); // Segnala l'errore
+            }}
+            source={{ uri: image }}
+            style={styles.image}
+          />
+        ) : (
+          <Ionicons name="image-outline" size={50} color="#ccc" /> // Icona di fallback
+        )}
+      </View>
+
+      {/* Contenitore informazioni */}
+      <View style={styles.infoContainer}>
+        <Text 
+          style={styles.title}
+          numberOfLines={2} 
+          ellipsizeMode="tail"
+        >
+          {title}
+        </Text>
+        <Text style={styles.price}>${price.toFixed(2)}</Text>
+      </View>
+    </TouchableOpacity>
+  );
 };
 
 export default memo(GenericProduct);
