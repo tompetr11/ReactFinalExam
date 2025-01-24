@@ -50,17 +50,28 @@ const refreshProducts = useCallback(async() => {
 }
 },[]);
 
-const refreshFilter = useCallback(async()=>{
-  try{
-    const responde =await fetch('https://fakestoreapi.com/products/categories');
-    const data = await responde.json();
-    const starFilters = [1, 2, 3, 4, 5].map((star) => `★${star}`);
-    setInitialFilter(['All','Asc','Desc', ...starFilters,...data]);
-    setFilter(['All','Asc','Desc', ...starFilters,...data]);
-  }catch(error){
+const refreshFilter = useCallback(async () => {
+  try {
+    const response = await fetch('https://fakestoreapi.com/products/categories');
+    const data = await response.json();
+
+    if (Array.isArray(data) && data.length > 0) {
+      // Unisci i filtri statici con le categorie prese dall'API
+      const staticFilters = ['All', 'Asc', 'Desc', ...[1, 2, 3, 4, 5].map((star) => `★${star}`)];
+      const allFilters = [...staticFilters, ...data];
+      setInitialFilter(allFilters);
+      setFilter(allFilters);
+    } else {
+      console.error('Error: API returned invalid categories:', data);
+      setInitialFilter(['All', 'Asc', 'Desc']);
+      setFilter(['All', 'Asc', 'Desc']);
+    }
+  } catch (error) {
     console.error('Error fetching filter:', error);
+    setInitialFilter(['All', 'Asc', 'Desc']); // Imposta solo i filtri statici in caso di errore
+    setFilter(['All', 'Asc', 'Desc']);
   }
-},[]);
+}, []);
 
 const loadFavorites = useCallback(async () => {
     try {

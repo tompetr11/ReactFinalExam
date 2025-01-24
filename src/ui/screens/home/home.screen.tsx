@@ -5,7 +5,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { GenericProduct } from '../../atoms/genericProduct/genericProduct.atom';
 import { FlatList, View, Text, StyleSheet, ListRenderItem, TouchableOpacity, Button } from 'react-native';
 import { styles } from './home.styles';
-import FilterButton from '../../atoms/filterButton/filterButton.atom';
+import FilterButton from '../../atoms/filterButton.atom.tsx/filterButton.atom';
+
 
 
 
@@ -26,23 +27,13 @@ const HomeScreen = ({ navigation }: Props) => {
     initialProducts,
   } = useProducts();
   const [selectedFilter, setSelectedFilter] = useState<string>('All'); // Stato per il filtro selezionato
-  const [selectedRating, setSelectedRating] = useState<number | null>(null); // Per il filtro delle stelle
-  const [selectedCategory, setSelectedCategory] = useState<string>('All'); // Categoria selezionata
  
   
   
   
 
 //**   USE CALLBACK *//
-const resetFilters = useCallback(() => {
-  setSelectedCategory('All');
-  setSelectedRating(null);
-  setProducts(initialProducts); // Mostra tutti i prodotti
-}, [initialProducts, setProducts]);
 
-  
-
-  
 
   const handleFilterClick = useCallback(
     (filter: string | number) => {
@@ -50,50 +41,27 @@ const resetFilters = useCallback(() => {
   
       if (typeof filter === 'number') {
         // Filtro per rating
-        setSelectedRating(filter);
+       
         setSelectedFilter(''); // Resetta i filtri per categoria
       }else {
         // Filtro per categoria
         setSelectedFilter(filter);
-        setSelectedRating(null); // Resetta i filtri per rating
+       
       }
     },
     []
   );
   
-  const renderRatingFilter = useCallback(() => {
-    const stars = [1, 2, 3, 4, 5]; // Valori per le stelle
-  
-    return (
-      <View style={styles.ratingFilterContainer}>
-        {stars.map((star) => (
-          <TouchableOpacity
-            key={star}
-            onPress={() => handleFilterClick(star)}
-            style={[
-              styles.starButton,
-              selectedRating === star && styles.selectedStarButton,
-            ]}
-          >
-            <Text style={styles.starText}>
-              {'★'.repeat(star)}{' '}
-              <Text style={{ color: '#888' }}>{'☆'.repeat(5 - star)}</Text>
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-    );
-  }, [selectedRating, handleFilterClick]);
-  
+ 
 
   const renderFilterItem = useCallback(
     ({ item }) => (
       <FilterButton
-      
+      title={item}
       onClick={ ()=>handleFilterClick(item)}
-      selected={selectedCategory === item}
+      selected={selectedFilter===item}
     >
-      {item}
+      
     </FilterButton>
     ),
     [selectedFilter] // Ri-renderizza solo se `selectedFilter` cambia
@@ -163,10 +131,13 @@ const resetFilters = useCallback(() => {
 
   useEffect(() => {
     let filteredProducts = initialProducts;
-    if (selectedRating) {
-      console.log(`Filtering products for rating >= ${selectedRating}`);
+    if (selectedFilter.startsWith('★')) {
+      // Filtro per stelle
+      const rating = parseInt(selectedFilter.replace('★', ''), 10);
       setProducts(
-        initialProducts.filter((product) => product.rating.rate >= selectedRating&& product.rating.rate <= selectedRating + 1)
+        initialProducts.filter(
+          (product) => Math.floor(product.rating.rate) === rating
+        )
       );
     } 
     
@@ -193,13 +164,12 @@ const resetFilters = useCallback(() => {
         .then((res) => res.json())
         .then((data) => setProducts(data));
     }
-  }, [selectedFilter, selectedRating]);
+  }, [selectedFilter]);
 
 
   return (
     
     <View style={styles.container}>
-    
       <View style={styles.filterContainer}>
       <FlatList
         data={filter}
@@ -210,12 +180,6 @@ const resetFilters = useCallback(() => {
         horizontal={true}
       />
       </View>
-
-      
-<Button title ="Reset Filters" onPress={resetFilters}/>
-
-      {renderRatingFilter()} {/* Mostra i filtri con le stelle */}
-
 
       {products.length > 0 ? (
         <FlatList

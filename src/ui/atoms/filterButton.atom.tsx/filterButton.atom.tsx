@@ -4,12 +4,12 @@ import { styles } from './filterButton.styles';
 
 
 const FilterButton = ({
-  children,
+ 
   selected,
   onClick,
   title,
 }:{
-  children: ReactElement;
+  
   selected?: boolean;
   onClick: ()=> void;
   title:string;
@@ -23,7 +23,7 @@ const FilterButton = ({
     ]}
     
   >
-    {title?<Text style={styles.text}>{title}</Text>:children}
+   <Text style={styles.text}>{title}</Text>
   </TouchableOpacity>
   );
 };

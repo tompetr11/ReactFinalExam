@@ -43,7 +43,8 @@ const favoritesList = useMemo(
       [addFavorite, favorites, products, navigation]
     );
 
-  const ItemSeparatorComponent = useCallback(() => <View style={styles.productSeparator} />, []);
+  const ItemSeparatorComponent = useCallback(() => 
+  <View style={styles.productSeparator} />, []);
   // ** USE EFFECT ** //
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {

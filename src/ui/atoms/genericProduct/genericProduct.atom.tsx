@@ -81,8 +81,8 @@ export const GenericProduct = ({ title, price, image,rating,selected, onAddFavor
         >
           {title}
         </Text>
-        <Text style={styles.price}>${price.toFixed(2)}</Text>
-        {renderStars(rating)} {/* Aggiunto rating */}
+<Text style={styles.price}>${price.toFixed(2)}</Text>
+{rating != null && renderStars(rating)} {/* Aggiunto rating */}
       </View>
     </TouchableOpacity>
   );
