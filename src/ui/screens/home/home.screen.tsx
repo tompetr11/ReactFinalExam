@@ -35,6 +35,10 @@ const HomeScreen = ({ navigation }: Props) => {
 //**   USE CALLBACK *//
 
 
+  
+
+  
+
   const handleFilterClick = useCallback(
     (filter: string | number) => {
       console.log('Filter clicked:', filter);
