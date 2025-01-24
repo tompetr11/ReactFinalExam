@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MainParamList, Screen } from "../../navigation/types";
 import { styles } from "./detail.styles";
 import { Ionicons } from '@expo/vector-icons';
+import StarRating from "../../atoms/starRating/starRating.atom";
 
 interface DetailProduct {
   id: number;
@@ -100,7 +101,7 @@ const DetailScreen = ({ navigation, route }: Props) => {
         <Text style={styles.price}>Price: ${product.price.toFixed(2)}</Text>
         <Text style={styles.description}>{product.description}</Text>
         <Text style={styles.rating}>
-          Rating: {product.rating.rate} ({product.rating.count} reviews)
+        {product.rating.rate != null && <StarRating rating={product.rating.rate} />} ({product.rating.count} reviews)
         </Text>
       </View>
 

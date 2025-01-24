@@ -51,7 +51,7 @@ const refreshProducts = useCallback(async() => {
 },[]);
 
 const refreshFilter = useCallback(async () => {
-  const staticFilters = ['All', 'Asc', 'Desc', ...[1, 2, 3, 4, 5].map((star) => `★${star}`)];
+  const staticFilters = ['All', ...[1, 2, 3, 4, 5].map((star) => `★${star}`)];
   try {
     const response = await fetch('https://fakestoreapi.com/products/categories');
     const data = await response.json();

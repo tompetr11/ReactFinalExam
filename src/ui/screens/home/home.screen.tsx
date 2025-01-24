@@ -8,7 +8,11 @@ import { styles } from './home.styles';
 import FilterButton from '../../atoms/filterButton.atom.tsx/filterButton.atom';
 
 
-
+enum FilterOrder {
+  initial = 'initial',
+  ascendent= 'asc',
+  descendent = 'desc',
+}
 
 interface Props {
   navigation: NativeStackNavigationProp<MainParamList, Screen.Home>;
@@ -26,37 +30,44 @@ const HomeScreen = ({ navigation }: Props) => {
     filter,
     initialProducts,
   } = useProducts();
-  
+
   const [selectedFilter, setSelectedFilter] = useState<string>('All'); 
  
-  
+  const ratingFilter =['asc','desc','initial']
+  const[filterRatingOrder,setFilterRatingOrder]=useState<FilterOrder>(FilterOrder.initial);
   
   
 
 //**   USE CALLBACK *//
-
+const onFilterApply = useCallback(
+  (type: FilterOrder)=> {
+    console.log('filtro passato: '+type)
+    setFilterRatingOrder(type);
+    if(type=== FilterOrder.initial){
+      setProducts(initialProducts);
+      return;
+    }if(type ===FilterOrder.ascendent){
+      setProducts(products.sort((a, b) => a.rating.rate - b.rating.rate))
+      return;
+    }if(type ===FilterOrder.descendent){
+      setProducts(products.sort((a, b) => b.rating.rate - a.rating.rate))
+      return;
+    }
+  
+},[products, initialProducts,setProducts]);
 
   
 
   
 
   const handleFilterClick = useCallback(
-    (filter: string | number) => {
+    (filter: string ) => {
       console.log('Filter clicked:', filter);
-  
-      if (typeof filter === 'number') {
-       
-       
-        setSelectedFilter(''); 
-      }else {
-        
-        setSelectedFilter(filter);
-       
-      }
+       setSelectedFilter(filter);
     },
     []
   );
-  
+ 
  
 
   const renderFilterItem = useCallback(
@@ -66,13 +77,21 @@ const HomeScreen = ({ navigation }: Props) => {
       onClick={ ()=>handleFilterClick(item)}
       selected={selectedFilter===item}
     >
-      
     </FilterButton>
     ),
     [selectedFilter] 
   );
   
-
+const renderOrderFilter = useCallback(
+  ({item})=>(
+    <FilterButton
+      title={item}
+      onClick={ ()=>onFilterApply(item)}
+      selected={filterRatingOrder===item}
+    >
+    </FilterButton>
+  ), [filterRatingOrder, onFilterApply]
+);
   const renderItem = useCallback(
     ({ item }) => (
       <View style={styles.card}>
@@ -133,10 +152,9 @@ const HomeScreen = ({ navigation }: Props) => {
     console.log('Products:', products); 
   }, [products]);
 
-
   useEffect(() => {
-    let filteredProducts = initialProducts;
     if (selectedFilter.startsWith('★')) {
+      setFilterRatingOrder(FilterOrder.initial);
       const rating = parseInt(selectedFilter.replace('★', ''), 10);
       setProducts(
         initialProducts.filter(
@@ -144,26 +162,13 @@ const HomeScreen = ({ navigation }: Props) => {
         )
       );
     } 
-    
     else if (selectedFilter === 'All' ) {
+      setFilterRatingOrder(FilterOrder.initial);
       console.log('Showing all products');
       setProducts(initialProducts);
     }
-    
-    else  if (selectedFilter === 'Desc') {
-      filteredProducts = filteredProducts.sort((a, b) =>
-       a.rating.rate - b.rating.rate 
-      );
-      setProducts(filteredProducts);
-    }
-    else if (selectedFilter === 'Asc') {
-      filteredProducts = filteredProducts.sort((a, b) =>
-        b.rating.rate - a.rating.rate
-      );
-      setProducts(filteredProducts);
-    }
-    
     else {
+      setFilterRatingOrder(FilterOrder.initial);
       fetch(`https://fakestoreapi.com/products/category/${selectedFilter}`)
         .then((res) => res.json())
         .then((data) => setProducts(data));
@@ -178,13 +183,23 @@ const HomeScreen = ({ navigation }: Props) => {
       <FlatList
         data={filter}
         renderItem={renderFilterItem}
-        keyExtractor={(item) => item}
+        keyExtractor={(filterItem) => filterItem}
         ItemSeparatorComponent={FilterSeparatorComponent}
         contentContainerStyle={styles.filterFlatList}
         horizontal={true}
       />
+      
       </View>
-
+      <View style={styles.filterContainer}>
+<FlatList
+      data={ratingFilter}
+      renderItem={renderOrderFilter}
+      keyExtractor={(orderItem)=>orderItem}
+      ItemSeparatorComponent={FilterSeparatorComponent}
+      contentContainerStyle={styles.filterFlatList}
+      horizontal={true}
+      />
+</View>
       {products.length > 0 ? (
         <FlatList
           data={products}

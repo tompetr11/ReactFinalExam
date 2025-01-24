@@ -18,6 +18,8 @@ export enum Screen {
   
   export type MainParamList = {
     TabNavigator: undefined;
+    [Screen.Home]: undefined;
+    [Screen.Favorites]:undefined;
     [Screen.Detail]: {
       id: number;
       idsArray: number[];

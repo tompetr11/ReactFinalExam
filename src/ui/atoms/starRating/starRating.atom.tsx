@@ -1,4 +1,3 @@
-// StarRating.tsx
 import React from 'react';
 import { FlatList, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,7 +11,6 @@ const StarRating = ({ rating }: StarRatingProps) => {
   const halfStar = rating % 1 >= 0.5; 
   const emptyStars = 5 - fullStars - (halfStar ? 1 : 0); 
 
-  
   const stars = [
     ...Array(fullStars).fill('full'),
     ...(halfStar ? ['half'] : []),
@@ -22,7 +20,7 @@ const StarRating = ({ rating }: StarRatingProps) => {
   return (
     <FlatList
       data={stars}
-      renderItem={({ item, index }) => {
+      renderItem={({ item }) => {
         let iconName = '';
         switch (item) {
           case 'full':
@@ -36,10 +34,10 @@ const StarRating = ({ rating }: StarRatingProps) => {
             break;
         }
         return (
-          <Ionicons key={index} name={iconName as 'star' | 'star-half' | 'star-outline'} size={16} color="#ffd700" />
+          <Ionicons name={iconName as 'star' | 'star-half' | 'star-outline'} size={16} color="#ffd700" />
         );
       }}
-      keyExtractor={( index) => index.toString()}
+      keyExtractor={(item, index) => `${item}-${index}`} // Combina tipo di stella e indice per una chiave univoca
       horizontal={true}
       showsHorizontalScrollIndicator={false}
     />
