@@ -59,16 +59,6 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
     paddingHorizontal: 10,
   },
-  starButton: {
-    padding: 8,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-  },
-  selectedStarButton: {
-    borderColor: '#ffd700',
-    backgroundColor: '#fff8dc',
-  },
   starText: {
     fontSize: 16,
     color: '#ffd700',

@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
   },
   flatList: {
     flexDirection: 'row',
+    flexWrap: 'wrap', // Permette agli elementi di andare a capo
     justifyContent: 'space-between', // Distribuisce gli elementi
     paddingHorizontal: 10,
     paddingVertical: 10,

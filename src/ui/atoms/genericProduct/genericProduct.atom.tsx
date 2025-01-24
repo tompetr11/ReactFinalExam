@@ -28,9 +28,9 @@ export const GenericProduct = ({ title, price, image,rating,selected, onAddFavor
         {/* Stella in alto a destra */}
         <Ionicons
           onPress={onAddFavorite}
-          name={selected ? 'star' : 'star-outline'}
+          name={selected ? 'heart' : 'heart-outline'}
           size={28}
-          color={'#ffd700'}
+          color={'red'}
           style={styles.favoriteIcon}
         />
 

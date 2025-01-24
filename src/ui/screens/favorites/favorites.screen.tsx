@@ -27,16 +27,7 @@ const favoritesList = useMemo(
             image={item.image}
             rating={item.rating.rate} 
             selected={favorites.includes(item.id)}
-            onPress={() => {
-              if (!item.id) {
-                console.log('Invalid item id');
-                return;
-              }
-                navigation.navigate(Screen.Detail, {
-                    id: item.id,
-                    idsArray: products.map((product) => product.id),
-                });
-            } }
+            onPress={() => null }
             onAddFavorite={() => addFavorite(item)} id={0}                />
    </View>
       ),
@@ -64,7 +55,7 @@ const favoritesList = useMemo(
               keyExtractor={(item) => item.id.toString()}
               ItemSeparatorComponent={ItemSeparatorComponent}
               contentContainerStyle={styles.flatList}
-              numColumns={undefined}
+              horizontal={false}
             />
           ) : (
             <Text style={styles.emptyMessage}>No products available</Text>
