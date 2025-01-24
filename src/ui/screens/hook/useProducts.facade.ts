@@ -54,7 +54,7 @@ const refreshFilter = useCallback(async()=>{
   try{
     const responde =await fetch('https://fakestoreapi.com/products/categories');
     const data = await responde.json();
-    setInitialFilter([...data]);
+    setInitialFilter(['All',...data]);
     setFilter(['All',...data]);
   }catch(error){
     console.error('Error fetching filter:', error);
@@ -95,7 +95,7 @@ return{
     setInitialFilter,
     filter,
     setFilter,
-    refreshFilter
+    refreshFilter,
 }
 
 };

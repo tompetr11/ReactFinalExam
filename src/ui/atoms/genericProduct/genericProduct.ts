@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fff00',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
   imageContainer: {
     width: '100%',
     height: 140, // Dimensione fissa per l'immagine
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
   loader: {
     position: 'absolute',
@@ -39,8 +39,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 5,
-    //numberOfLines: 1, // Mostra una sola riga
-    //ellipsizeMode: 'tail', // Aggiungi "..." per il testo lungo
   },
   price: {
     fontSize: 14,

@@ -24,38 +24,33 @@ const HomeScreen = ({ navigation }: Props) => {
     refreshFilter,
     filter,
     initialProducts,
-    setInitialProducts,
   } = useProducts();
   const [selectedFilter, setSelectedFilter] = useState<string>('All'); // Stato per il filtro selezionato
-  const [loading, setLoading] = useState(true);
 
 
-  const onFilterApply = useCallback(
-    (type: string) => {
-      // Remove the loading check
-      console.log('Applying filter:', type);
-      if (type === 'All' || !type) {
-        console.log('Showing all products');
-        setProducts(initialProducts);
-      } else {
-        console.log('Filtering products for category:', type);
-        const filteredProducts = initialProducts.filter((product) => {
-          return product.category === type;
-        });
-        console.log('Filtered products:', filteredProducts);
-        setProducts(filteredProducts);
-      }
-    },
-    [initialProducts, setProducts]
-  );
+
+  
+
+  useEffect(() => {
+    if (selectedFilter === 'All' || !selectedFilter) {
+      console.log('Showing all products');
+      setProducts(initialProducts);
+    } else {
+    fetch('https://fakestoreapi.com/products/category/'+selectedFilter)
+            .then((res)=>res.json())
+            .then((data)=>
+            setProducts(data));
+          }
+
+  }, [selectedFilter]);
+    
 
   const handleFilterClick = useCallback(
     (filter: string) => {
       console.log('Filter clicked:', filter);
-      onFilterApply(filter); // Applica il filtro subito dopo
       setSelectedFilter(filter); // Imposta il filtro selezionato
     },
-    [onFilterApply] // Usa il `onFilterApply` aggiornato
+    [] // Usa il `onFilterApply` aggiornato
   );
 
   const renderFilterItem = useCallback(
@@ -112,19 +107,12 @@ const HomeScreen = ({ navigation }: Props) => {
       refreshProducts();
       refreshFilter();
       loadFavorites();
-      setLoading(true);
-      onFilterApply("All");
     });
 
     return unsubscribe;
-  }, [loadFavorites, navigation, refreshProducts, onFilterApply]);
+  }, [loadFavorites, navigation, refreshProducts]);
 
-  useEffect(() => {
-    if (initialProducts && initialProducts.length > 0) {
-      setLoading(false);
-      onFilterApply("All"); // Ensure initial filter is applied
-    }
-  }, [initialProducts, onFilterApply]);
+  
 
   useEffect(() => {
     console.log('Products:', products); // Debugging
@@ -151,7 +139,7 @@ const HomeScreen = ({ navigation }: Props) => {
           keyExtractor={(item) => item.id.toString()}
           ItemSeparatorComponent={ItemSeparatorComponent}
           contentContainerStyle={styles.productsFlatList}
-          numColumns={undefined}
+          horizontal={false}
         />
       ) : (
         <Text style={styles.emptyMessage}>No products available</Text>
