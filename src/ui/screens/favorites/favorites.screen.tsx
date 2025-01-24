@@ -36,7 +36,9 @@ const favoritesList = useMemo(
 
   const ItemSeparatorComponent = useCallback(() => 
   <View style={styles.productSeparator} />, []);
+
   // ** USE EFFECT ** //
+  
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log('Favorites screen focused');

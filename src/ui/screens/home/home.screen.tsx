@@ -26,7 +26,8 @@ const HomeScreen = ({ navigation }: Props) => {
     filter,
     initialProducts,
   } = useProducts();
-  const [selectedFilter, setSelectedFilter] = useState<string>('All'); // Stato per il filtro selezionato
+  
+  const [selectedFilter, setSelectedFilter] = useState<string>('All'); 
  
   
   
@@ -44,11 +45,11 @@ const HomeScreen = ({ navigation }: Props) => {
       console.log('Filter clicked:', filter);
   
       if (typeof filter === 'number') {
-        // Filtro per rating
        
-        setSelectedFilter(''); // Resetta i filtri per categoria
+       
+        setSelectedFilter(''); 
       }else {
-        // Filtro per categoria
+        
         setSelectedFilter(filter);
        
       }
@@ -68,7 +69,7 @@ const HomeScreen = ({ navigation }: Props) => {
       
     </FilterButton>
     ),
-    [selectedFilter] // Ri-renderizza solo se `selectedFilter` cambia
+    [selectedFilter] 
   );
   
 
@@ -76,12 +77,12 @@ const HomeScreen = ({ navigation }: Props) => {
     ({ item }) => (
       <View style={styles.card}>
         <GenericProduct
-          id={item.id} // Passa l'id
-          title={item.title} // Passa il titolo
-          price={item.price} // Passa il prezzo
-          image={item.image} // Passa l'immagine
-          rating={item.rating.rate} // Passa il rating come prop
-          selected={favorites.includes(item.id)} // Controlla se è tra i preferiti
+          id={item.id} 
+          title={item.title} 
+          price={item.price} 
+          image={item.image} 
+          rating={item.rating.rate} 
+          selected={favorites.includes(item.id)} 
           onPress={() => {
             if (!item.id) {
               console.log('Invalid item id');
@@ -92,7 +93,7 @@ const HomeScreen = ({ navigation }: Props) => {
               idsArray: products.map((product) => product.id),
             });
           }}
-          onAddFavorite={() => addFavorite(item)} // Funzione per aggiungere ai preferiti
+          onAddFavorite={() => addFavorite(item)} 
         />
       </View>
     ),
@@ -129,14 +130,13 @@ const HomeScreen = ({ navigation }: Props) => {
   
 
   useEffect(() => {
-    console.log('Products:', products); // Debugging
+    console.log('Products:', products); 
   }, [products]);
 
 
   useEffect(() => {
     let filteredProducts = initialProducts;
     if (selectedFilter.startsWith('★')) {
-      // Filtro per stelle
       const rating = parseInt(selectedFilter.replace('★', ''), 10);
       setProducts(
         initialProducts.filter(

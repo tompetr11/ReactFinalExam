@@ -4,15 +4,15 @@ import { FlatList, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 interface StarRatingProps {
-  rating: number; // Rating numerico, es. 3.5
+  rating: number; 
 }
 
 const StarRating = ({ rating }: StarRatingProps) => {
-  const fullStars = Math.floor(rating); // Stelle piene
-  const halfStar = rating % 1 >= 0.5; // Mezza stella
-  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0); // Stelle vuote
+  const fullStars = Math.floor(rating); 
+  const halfStar = rating % 1 >= 0.5; 
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0); 
 
-  // Crea un array di stelle, piene, mezze e vuote
+  
   const stars = [
     ...Array(fullStars).fill('full'),
     ...(halfStar ? ['half'] : []),
@@ -39,7 +39,7 @@ const StarRating = ({ rating }: StarRatingProps) => {
           <Ionicons key={index} name={iconName as 'star' | 'star-half' | 'star-outline'} size={16} color="#ffd700" />
         );
       }}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={( index) => index.toString()}
       horizontal={true}
       showsHorizontalScrollIndicator={false}
     />

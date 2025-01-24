@@ -10,13 +10,13 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
     margin: 10,
-    width: 160, // Larghezza fissa
-    height: 260, // Altezza fissa per uniformità
+    width: 160, 
+    height: 260, 
     overflow: 'hidden',
   },
   imageContainer: {
     width: '100%',
-    height: 140, // Dimensione fissa per l'immagine
+    height: 140, 
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
   },
   infoContainer: {
     padding: 10,
-    flex: 1, // Per assicurarsi che lo spazio rimanente venga usato dal testo
+    flex: 1, 
   },
   title: {
     fontSize: 14,
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     right: 10,
-    zIndex: 1, // Porta l'icona sopra l'immagine
+    zIndex: 1, 
   },
   ratingContainer: {
     flexDirection: 'row',

@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 2,
     backgroundColor: '#f5f5f5',
-    paddingTop: 20, // Aggiungi un po' di spazio sopra
+    paddingTop: 20, 
   },
   productsFlatList: {
     flexDirection: 'row',
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 10,
     paddingVertical: 10,
-    marginTop: 20, // Aggiungi spazio sopra la lista dei prodotti
+    marginTop: 20, 
   },
   productSeparator: {
     height: 10,
@@ -79,7 +79,7 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
   },
   resetButton: {
-    backgroundColor: '#ff5555', // Rosso acceso
+    backgroundColor: '#ff5555', 
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 5,

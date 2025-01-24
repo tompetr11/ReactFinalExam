@@ -23,9 +23,9 @@ export const GenericProduct = ({ title, price, image,rating,selected, onAddFavor
 
  return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      {/* Contenitore immagine con icona */}
+      
       <View style={styles.imageContainer}>
-        {/* Stella in alto a destra */}
+        
         <Ionicons
           onPress={onAddFavorite}
           name={selected ? 'heart' : 'heart-outline'}
@@ -40,7 +40,7 @@ export const GenericProduct = ({ title, price, image,rating,selected, onAddFavor
             onLoadEnd={() => setLoading(false)}
             onError={() => {
               setLoading(false);
-              setError(true); // Segnala l'errore
+              setError(true); 
             }}
             source={{ uri: image }}
             style={styles.image}
@@ -48,7 +48,7 @@ export const GenericProduct = ({ title, price, image,rating,selected, onAddFavor
         
       </View>
 
-      {/* Contenitore informazioni */}
+     
       <View style={styles.infoContainer}>
         <Text 
           style={styles.title}

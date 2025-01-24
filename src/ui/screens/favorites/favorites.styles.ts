@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
   },
   flatList: {
     flexDirection: 'row',
-    flexWrap: 'wrap', // Permette agli elementi di andare a capo
-    justifyContent: 'space-between', // Distribuisce gli elementi
+    flexWrap: 'wrap', 
+    justifyContent: 'space-between', 
     paddingHorizontal: 10,
     paddingVertical: 10,
   },
@@ -25,9 +25,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   card: {
-    flex: 1, // Adatta gli elementi al contenitore
+    flex: 1, 
     margin: 5,
-    maxWidth: '48%', // Occupa circa metà dello schermo con un margine
+    maxWidth: '48%', 
   },
   
 });

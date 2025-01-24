@@ -51,25 +51,23 @@ const refreshProducts = useCallback(async() => {
 },[]);
 
 const refreshFilter = useCallback(async () => {
+  const staticFilters = ['All', 'Asc', 'Desc', ...[1, 2, 3, 4, 5].map((star) => `★${star}`)];
   try {
     const response = await fetch('https://fakestoreapi.com/products/categories');
     const data = await response.json();
-
+    
     if (Array.isArray(data) && data.length > 0) {
-      // Unisci i filtri statici con le categorie prese dall'API
-      const staticFilters = ['All', 'Asc', 'Desc', ...[1, 2, 3, 4, 5].map((star) => `★${star}`)];
+      
       const allFilters = [...staticFilters, ...data];
+
       setInitialFilter(allFilters);
       setFilter(allFilters);
-    } else {
-      console.error('Error: API returned invalid categories:', data);
-      setInitialFilter(['All', 'Asc', 'Desc']);
-      setFilter(['All', 'Asc', 'Desc']);
-    }
+    } 
   } catch (error) {
     console.error('Error fetching filter:', error);
-    setInitialFilter(['All', 'Asc', 'Desc']); // Imposta solo i filtri statici in caso di errore
-    setFilter(['All', 'Asc', 'Desc']);
+    setInitialFilter(staticFilters);
+    setFilter(staticFilters);
+    
   }
 }, []);
 
@@ -82,6 +80,7 @@ const loadFavorites = useCallback(async () => {
       console.error('Error loading favorites:', error);
     }
   }, []);
+
   const addFavorite = useCallback(
     async (item: Product) => {
       const updatedFavorites = favorites.includes(item.id)
@@ -93,6 +92,7 @@ const loadFavorites = useCallback(async () => {
     },
     [favorites]
   );
+
 return{
     products,
     setProducts,
