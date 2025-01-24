@@ -52,4 +52,51 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 16,
   },
+  ratingFilterContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginVertical: 10,
+    paddingHorizontal: 10,
+  },
+  starButton: {
+    padding: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+  },
+  selectedStarButton: {
+    borderColor: '#ffd700',
+    backgroundColor: '#fff8dc',
+  },
+  starText: {
+    fontSize: 16,
+    color: '#ffd700',
+    fontWeight: 'bold',
+  },
+  button: {
+    padding: 10,
+    backgroundColor: '#f0f0f0',
+    borderRadius: 5,
+  },
+  selectedButton: {
+    padding: 10,
+    backgroundColor: '#ffd700',
+    borderRadius: 5,
+  },
+  resetButtonContainer: {
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  resetButton: {
+    backgroundColor: '#ff5555', // Rosso acceso
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  resetButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });

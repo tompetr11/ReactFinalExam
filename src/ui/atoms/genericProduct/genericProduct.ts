@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     elevation: 3,
     margin: 10,
     width: 160, // Larghezza fissa
-    height: 220, // Altezza fissa per uniformità
+    height: 260, // Altezza fissa per uniformità
     overflow: 'hidden',
   },
   imageContainer: {
@@ -49,6 +49,11 @@ export const styles = StyleSheet.create({
     top: 10,
     right: 10,
     zIndex: 1, // Porta l'icona sopra l'immagine
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 5,
   },
   
 });

@@ -9,15 +9,38 @@ interface ProductProps {
   price: number;
   image: string;
   selected?: boolean;
+  rating?: number;
   onPress: () => void;
   onAddFavorite?: () => void;
 }
 
-export const GenericProduct = ({ title, price, image,selected, onAddFavorite, onPress }: ProductProps) => {
+export const GenericProduct = ({ title, price, image,rating,selected, onAddFavorite, onPress }: ProductProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  return (
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating); // Stelle piene
+    const halfStar = rating % 1 >= 0.5; // Mezza stella
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0); // Stelle vuote
+
+    return (
+      <View style={styles.ratingContainer}>
+        {Array(fullStars)
+          .fill(0)
+          .map((_, index) => (
+            <Ionicons key={`full-${index}`} name="star" size={16} color="#ffd700" />
+          ))}
+        {halfStar && <Ionicons name="star-half" size={16} color="#ffd700" />}
+        {Array(emptyStars)
+          .fill(0)
+          .map((_, index) => (
+            <Ionicons key={`empty-${index}`} name="star-outline" size={16} color="#ffd700" />
+          ))}
+      </View>
+    );
+  };
+
+ return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
       {/* Contenitore immagine con icona */}
       <View style={styles.imageContainer}>
@@ -29,7 +52,7 @@ export const GenericProduct = ({ title, price, image,selected, onAddFavorite, on
           color={'#ffd700'}
           style={styles.favoriteIcon}
         />
-        
+
         {loading && !error && (
           <ActivityIndicator size="large" color="#000" style={styles.loader} />
         )}
@@ -59,6 +82,7 @@ export const GenericProduct = ({ title, price, image,selected, onAddFavorite, on
           {title}
         </Text>
         <Text style={styles.price}>${price.toFixed(2)}</Text>
+        {renderStars(rating)} {/* Aggiunto rating */}
       </View>
     </TouchableOpacity>
   );

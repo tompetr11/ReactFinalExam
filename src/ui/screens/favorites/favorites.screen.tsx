@@ -25,6 +25,7 @@ const favoritesList = useMemo(
             title={item.title}
             price={item.price}
             image={item.image}
+            rating={item.rating.rate} 
             selected={favorites.includes(item.id)}
             onPress={() => {
               if (!item.id) {
