@@ -74,7 +74,7 @@ const onFilterApply = useCallback(
  
  
 
-  const renderFilterItem = useCallback(
+  const renderFilterItem = useCallback<ListRenderItem<any>>(
     ({ item }) => (
       <FilterButton
       title={item}
@@ -86,7 +86,7 @@ const onFilterApply = useCallback(
     [selectedFilter] 
   );
   
-const renderOrderFilter = useCallback(
+const renderOrderFilter = useCallback<ListRenderItem<any>>(
   ({item})=>(
     <FilterButton
       title={item}
@@ -96,7 +96,7 @@ const renderOrderFilter = useCallback(
     </FilterButton>
   ), [filterRatingOrder, onFilterApply]
 );
-  const renderItem = useCallback(
+  const renderItem = useCallback<ListRenderItem<any>>(
     ({ item }) => (
       <View style={styles.card}>
         <GenericProduct

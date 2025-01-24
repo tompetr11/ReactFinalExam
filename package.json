@@ -1,5 +1,5 @@
 {
-  "name": "prolist",
+  "name": "main",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@react-native-community/cli": "latest",
     "@types/react": "~18.3.12",
     "@types/react-native": "^0.72.8",
     "eslint": "^9.18.0",

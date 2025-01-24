@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ProList",
-    "slug": "ProList",
+    "name": "main",
+    "slug": "main",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.ProList"
+      "package": "com.anonymous.ReactFinalExam"
     },
     "web": {
       "favicon": "./assets/favicon.png"
