@@ -32,7 +32,7 @@ const HomeScreen = ({ navigation }: Props) => {
   } = useProducts();
 
   const [selectedFilter, setSelectedFilter] = useState<string>('All'); 
- 
+  const [categoryInitialProducts, setCategoryInitialProducts] = useState<any[]>([]);
   const ratingFilter =['asc','desc','initial']
   const[filterRatingOrder,setFilterRatingOrder]=useState<FilterOrder>(FilterOrder.initial);
   
@@ -43,18 +43,22 @@ const onFilterApply = useCallback(
   (type: FilterOrder)=> {
     console.log('filtro passato: '+type)
     setFilterRatingOrder(type);
-    if(type=== FilterOrder.initial){
-      setProducts(initialProducts);
+    if (type === FilterOrder.initial) {
+      if (selectedFilter === 'All') {
+        setProducts(initialProducts);
+      } else {
+        setProducts([...categoryInitialProducts]); 
+      }
       return;
     }if(type ===FilterOrder.ascendent){
-      setProducts(products.sort((a, b) => a.rating.rate - b.rating.rate))
+      setProducts([...products].sort((a, b) => a.rating.rate - b.rating.rate))
       return;
     }if(type ===FilterOrder.descendent){
-      setProducts(products.sort((a, b) => b.rating.rate - a.rating.rate))
+      setProducts([...products].sort((a, b) => b.rating.rate - a.rating.rate))
       return;
     }
   
-},[products, initialProducts,setProducts]);
+},[products, initialProducts,setProducts, categoryInitialProducts,selectedFilter]);
 
   
 
@@ -154,7 +158,7 @@ const renderOrderFilter = useCallback(
 
   useEffect(() => {
     if (selectedFilter.startsWith('★')) {
-      setFilterRatingOrder(FilterOrder.initial);
+      
       const rating = parseInt(selectedFilter.replace('★', ''), 10);
       setProducts(
         initialProducts.filter(
@@ -163,17 +167,24 @@ const renderOrderFilter = useCallback(
       );
     } 
     else if (selectedFilter === 'All' ) {
-      setFilterRatingOrder(FilterOrder.initial);
+      
       console.log('Showing all products');
       setProducts(initialProducts);
+      setCategoryInitialProducts(initialProducts); 
     }
     else {
-      setFilterRatingOrder(FilterOrder.initial);
+     
       fetch(`https://fakestoreapi.com/products/category/${selectedFilter}`)
-        .then((res) => res.json())
-        .then((data) => setProducts(data));
+  .then((res) => res.json())
+  .then((data) => {
+    const sortedData = [...data]; 
+    setProducts(sortedData);
+    setCategoryInitialProducts(sortedData);
+  });
+       
     }
-  }, [selectedFilter]);
+    setFilterRatingOrder(FilterOrder.initial);
+  }, [selectedFilter, initialProducts]);
 
 
   return (
@@ -208,6 +219,7 @@ const renderOrderFilter = useCallback(
           ItemSeparatorComponent={ItemSeparatorComponent}
           contentContainerStyle={styles.productsFlatList}
           horizontal={false}
+          
         />
       ) : (
         <Text style={styles.emptyMessage}>No products available</Text>

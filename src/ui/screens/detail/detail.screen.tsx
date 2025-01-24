@@ -75,10 +75,10 @@ const DetailScreen = ({ navigation, route }: Props) => {
 
   return (
     <ScrollView style={[styles.container, { paddingTop: top, paddingBottom: bottom }]}>
-      {/* Header con immagine */}
+     
       <Image source={{ uri: product.image }} style={styles.imageHeader} />
 
-      {/* Navigazione tra i prodotti */}
+    
       <View style={styles.navigatorContainer}>
         <Ionicons
           name="chevron-back-circle"
@@ -94,7 +94,7 @@ const DetailScreen = ({ navigation, route }: Props) => {
         />
       </View>
 
-      {/* Informazioni sul prodotto */}
+     
       <View style={styles.infoContainer}>
         <Text style={styles.title}>{product.title}</Text>
         <Text style={styles.category}>Category: {product.category}</Text>
@@ -105,7 +105,7 @@ const DetailScreen = ({ navigation, route }: Props) => {
         </Text>
       </View>
 
-      {/* Spacer e Pulsante "Go Back" */}
+      
       <View style={styles.spacer}></View>
       <Button title="Go Back" onPress={navigation.goBack} />
       <View style={styles.spacer}></View>
